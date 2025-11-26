@@ -1,19 +1,19 @@
 
 import React from 'react';
 import { Article } from '../types';
-import { Clock, Tag, ArrowRight, Sparkles } from 'lucide-react';
+import { Clock, ArrowRight, Sparkles } from 'lucide-react';
 
 interface ArticleCardProps {
   article: Article;
   onClick: (id: string) => void;
+  onTagClick?: (tag: string) => void;
   recommendationReason?: string;
 }
 
-const ArticleCard: React.FC<ArticleCardProps> = ({ article, onClick, recommendationReason }) => {
+const ArticleCard: React.FC<ArticleCardProps> = ({ article, onClick, onTagClick, recommendationReason }) => {
   return (
     <article 
       className="bg-white rounded-xl shadow-sm border border-slate-100 overflow-hidden hover:shadow-xl hover:border-cyan-100 transition-all cursor-pointer group flex flex-col h-full relative"
-      onClick={() => onClick(article.id)}
     >
       {recommendationReason && (
         <div className="bg-gradient-to-r from-indigo-600 to-purple-600 text-white text-[10px] font-bold px-3 py-1 uppercase tracking-wider flex items-center gap-1">
@@ -22,7 +22,7 @@ const ArticleCard: React.FC<ArticleCardProps> = ({ article, onClick, recommendat
         </div>
       )}
       
-      <div className="relative h-56 overflow-hidden bg-slate-100">
+      <div className="relative h-56 overflow-hidden bg-slate-100" onClick={() => onClick(article.id)}>
         <img 
           src={article.imageUrl} 
           alt={article.altText || article.title} 
@@ -45,23 +45,33 @@ const ArticleCard: React.FC<ArticleCardProps> = ({ article, onClick, recommendat
           <span>{article.readTime} READ</span>
         </div>
         
-        <h3 className="text-xl font-bold text-slate-900 mb-3 group-hover:text-cyan-700 transition-colors leading-tight">
+        <h3 
+            className="text-xl font-bold text-slate-900 mb-3 group-hover:text-cyan-700 transition-colors leading-tight"
+            onClick={() => onClick(article.id)}
+        >
           {article.title}
         </h3>
         
-        <p className="text-slate-600 text-sm mb-6 line-clamp-3 flex-grow leading-relaxed">
+        <p className="text-slate-600 text-sm mb-6 line-clamp-3 flex-grow leading-relaxed" onClick={() => onClick(article.id)}>
           {article.summary}
         </p>
         
         <div className="flex items-center justify-between mt-auto pt-4 border-t border-slate-50">
-           <div className="flex gap-2">
+           <div className="flex gap-2 flex-wrap">
              {article.tags.slice(0, 2).map(tag => (
-               <span key={tag} className="inline-flex items-center text-[10px] font-bold text-slate-500 bg-slate-100 px-2 py-1 rounded uppercase">
+               <button 
+                key={tag} 
+                onClick={(e) => {
+                    e.stopPropagation();
+                    if (onTagClick) onTagClick(tag);
+                }}
+                className="inline-flex items-center text-[10px] font-bold text-slate-500 bg-slate-100 px-2 py-1 rounded uppercase hover:bg-slate-200 transition-colors"
+               >
                  {tag}
-               </span>
+               </button>
              ))}
            </div>
-           <span className="text-cyan-600 p-2 rounded-full hover:bg-cyan-50 transition-all">
+           <span className="text-cyan-600 p-2 rounded-full hover:bg-cyan-50 transition-all" onClick={() => onClick(article.id)}>
              <ArrowRight className="w-5 h-5" />
            </span>
         </div>

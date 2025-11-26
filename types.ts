@@ -20,6 +20,7 @@ export interface Article {
   publishDate: string;
   seoDescription?: string;
   seoKeywords?: string[];
+  series?: string; // Series name for grouping
 }
 
 export interface QuizQuestion {

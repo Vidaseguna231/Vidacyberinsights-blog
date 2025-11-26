@@ -1,7 +1,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { Article } from '../types';
-import { BookOpen, BrainCircuit, Wand2, ArrowLeft, Calendar, User, ArrowRight } from 'lucide-react';
+import { BookOpen, BrainCircuit, Wand2, ArrowLeft, Calendar, User, ArrowRight, Layers } from 'lucide-react';
 import QuizModal from './QuizModal';
 
 interface ArticleViewProps {
@@ -9,9 +9,10 @@ interface ArticleViewProps {
   onBack: () => void;
   relatedArticles: Article[];
   onArticleClick: (id: string) => void;
+  onSeriesClick?: (series: string) => void;
 }
 
-const ArticleView: React.FC<ArticleViewProps> = ({ article, onBack, relatedArticles, onArticleClick }) => {
+const ArticleView: React.FC<ArticleViewProps> = ({ article, onBack, relatedArticles, onArticleClick, onSeriesClick }) => {
   const [complexity, setComplexity] = useState<'beginner' | 'advanced'>('beginner');
   const [content, setContent] = useState<string>(article.content);
   const [isQuizOpen, setIsQuizOpen] = useState(false);
@@ -58,6 +59,10 @@ const ArticleView: React.FC<ArticleViewProps> = ({ article, onBack, relatedArtic
       
       if (trimmedLine.startsWith('### ')) {
           return <h3 key={index} className="text-xl md:text-2xl font-bold mt-6 mb-3 text-slate-800">{trimmedLine.replace('### ', '')}</h3>;
+      }
+      
+      if (trimmedLine.startsWith('#### ')) {
+          return <h4 key={index} className="text-lg md:text-xl font-bold mt-5 mb-2 text-slate-800">{trimmedLine.replace('#### ', '')}</h4>;
       }
       
       if (trimmedLine.startsWith('* ') || trimmedLine.startsWith('- ')) {
@@ -138,6 +143,15 @@ const ArticleView: React.FC<ArticleViewProps> = ({ article, onBack, relatedArtic
                     <BookOpen className="w-4 h-4 text-cyan-500" />
                     <span>{article.readTime} read</span>
                  </div>
+                 {article.series && onSeriesClick && (
+                     <button 
+                        onClick={() => onSeriesClick(article.series!)}
+                        className="flex items-center gap-2 text-indigo-600 hover:text-indigo-800 transition-colors"
+                     >
+                        <Layers className="w-4 h-4" />
+                        <span>Series: {article.series}</span>
+                     </button>
+                 )}
              </div>
         </div>
 

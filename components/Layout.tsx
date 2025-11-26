@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { UserRole, Language } from '../types';
 import { LANGUAGES } from '../constants';
@@ -10,10 +11,11 @@ interface LayoutProps {
   language: Language;
   onLanguageChange: (lang: Language) => void;
   onNavigateHome: () => void;
+  onNavigateArchive?: (date: string) => void;
 }
 
 const Layout: React.FC<LayoutProps> = ({ 
-  children, userRole, onRoleChange, language, onLanguageChange, onNavigateHome 
+  children, userRole, onRoleChange, language, onLanguageChange, onNavigateHome, onNavigateArchive
 }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [largeText, setLargeText] = useState(false);
@@ -202,11 +204,11 @@ const Layout: React.FC<LayoutProps> = ({
             </div>
 
             <div>
-                 <h3 className="font-bold text-white mb-4 uppercase text-xs tracking-wider">Support</h3>
+                 <h3 className="font-bold text-white mb-4 uppercase text-xs tracking-wider">Explore</h3>
                 <ul className="text-sm space-y-2 opacity-80">
-                    <li><button className="hover:text-cyan-400 transition-colors">Contact Us</button></li>
-                    <li><button className="hover:text-cyan-400 transition-colors">Help Center</button></li>
-                    <li><button className="hover:text-cyan-400 transition-colors">Accessibility Statement</button></li>
+                    <li><button onClick={() => onNavigateArchive && onNavigateArchive('2024')} className="hover:text-cyan-400 transition-colors">2024 Archives</button></li>
+                    <li><button onClick={() => onNavigateArchive && onNavigateArchive('2023')} className="hover:text-cyan-400 transition-colors">2023 Archives</button></li>
+                    <li><button className="hover:text-cyan-400 transition-colors">Glossary</button></li>
                 </ul>
             </div>
 

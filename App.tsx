@@ -3,6 +3,7 @@ import React, { useState, useMemo, useEffect } from 'react';
 import Layout from './components/Layout';
 import ArticleCard from './components/ArticleCard';
 import ArticleView from './components/ArticleView';
+import HubView from './components/HubView';
 import SearchBar from './components/SearchBar';
 import { INITIAL_ARTICLES } from './constants';
 import { Article, UserRole, Language, UserProfile, Recommendation } from './types';
@@ -10,133 +11,136 @@ import { searchArticles } from './services/geminiService';
 import { getRecommendations } from './services/recommendationService';
 import { Filter, GraduationCap, Users, Briefcase, School, Star, Sparkles } from 'lucide-react';
 
+type ViewState = 
+  | { type: 'home' }
+  | { type: 'article'; id: string }
+  | { type: 'role-hub'; role: UserRole }
+  | { type: 'topic-hub'; topic: string }
+  | { type: 'series-hub'; series: string }
+  | { type: 'archive-hub'; date: string };
+
 const App: React.FC = () => {
-  const [currentView, setCurrentView] = useState<'home' | 'article'>('home');
-  const [selectedArticleId, setSelectedArticleId] = useState<string | null>(null);
-  const [userRole, setUserRole] = useState<UserRole>('all');
+  const [viewState, setViewState] = useState<ViewState>({ type: 'home' });
+  const [userRole, setUserRole] = useState<UserRole>('all'); // Persistent preference
   const [language, setLanguage] = useState<Language>('en');
   const [searchResults, setSearchResults] = useState<string[] | null>(null);
   const [isSearching, setIsSearching] = useState(false);
-  const [selectedTopic, setSelectedTopic] = useState<string | null>(null);
   
-  // Recommendation State
-  const [recommendations, setRecommendations] = useState<Recommendation[]>([]);
+  // Recommendation State for Home
+  const [homeRecommendations, setHomeRecommendations] = useState<Recommendation[]>([]);
 
-  // Derive unique topics (tags) from available articles
-  const availableTopics = useMemo(() => {
-     const allTags = new Set<string>();
-     INITIAL_ARTICLES.forEach(a => a.tags.forEach(t => allTags.add(t)));
-     return Array.from(allTags).sort();
-  }, []);
+  // Update document title based on view
+  useEffect(() => {
+    if (viewState.type === 'home') document.title = 'Vidacyberinsights - Global Cybersecurity Awareness';
+  }, [viewState]);
 
-  // Update recommendations when role changes
+  // Update recommendations when role changes (Only relevant for Home view mostly)
   useEffect(() => {
     if (userRole === 'all') {
-        setRecommendations([]);
+        setHomeRecommendations([]);
         return;
     }
 
-    // Mock User Profile for the selected role
     const mockUser: UserProfile = {
-        id: 'mock-user-1',
+        id: 'home-visitor',
         role: userRole,
         language: language,
-        savedTopics: userRole === 'business' ? ['Ransomware', 'Strategy'] : ['Basics'], // Simulate some saved interest
-        completedArticleIds: [] // Simulate new user
+        savedTopics: [],
+        completedArticleIds: []
     };
 
     const response = getRecommendations(mockUser, INITIAL_ARTICLES);
-    setRecommendations(response.recommendations);
-    console.log("Recommendation Debug:", response.debug);
+    setHomeRecommendations(response.recommendations);
 
   }, [userRole, language]);
 
-  // Filter articles based on Role, Search Results, and Topic
-  const filteredArticles = useMemo(() => {
-    let articles = INITIAL_ARTICLES;
-
-    // Filter by Role
-    if (userRole !== 'all') {
-      articles = articles.filter(a => a.audience === userRole);
-    }
-
-    // Filter by Topic
-    if (selectedTopic) {
-        articles = articles.filter(a => a.tags.includes(selectedTopic));
-    }
-
-    // Filter by Search (if active)
-    if (searchResults) {
-      // Sort by the order returned by Gemini
-      articles = articles.filter(a => searchResults.includes(a.id));
-      articles.sort((a, b) => searchResults.indexOf(a.id) - searchResults.indexOf(b.id));
-    }
-
-    return articles;
-  }, [userRole, searchResults, selectedTopic]);
-
-  // Featured articles (fallback if no specific recommendations or user is 'all')
+  // Featured articles for Home
   const featuredArticles = useMemo(() => {
       return INITIAL_ARTICLES.slice(0, 4);
   }, []);
 
-  const handleArticleClick = (id: string) => {
-    setSelectedArticleId(id);
-    setCurrentView('article');
+  // -- Navigation Handlers --
+
+  const navigateToArticle = (id: string) => {
+    setViewState({ type: 'article', id });
+    window.scrollTo(0, 0);
+  };
+
+  const navigateToRoleHub = (role: UserRole) => {
+    setViewState({ type: 'role-hub', role });
+    setUserRole(role); // Also update global preference
+    window.scrollTo(0, 0);
+  };
+
+  const navigateToTopicHub = (topic: string) => {
+    setViewState({ type: 'topic-hub', topic });
+    window.scrollTo(0, 0);
+  };
+  
+  const navigateToSeriesHub = (series: string) => {
+    setViewState({ type: 'series-hub', series });
+    window.scrollTo(0, 0);
+  }
+
+  const navigateToArchiveHub = (date: string) => {
+    setViewState({ type: 'archive-hub', date });
+    window.scrollTo(0, 0);
+  }
+
+  const navigateHome = () => {
+    setViewState({ type: 'home' });
+    setSearchResults(null);
     window.scrollTo(0, 0);
   };
 
   const handleSearch = async (query: string) => {
     setIsSearching(true);
-    // Pass all articles to the search service to determine relevance
     const ids = await searchArticles(query, INITIAL_ARTICLES);
     setSearchResults(ids);
     setIsSearching(false);
     
-    // If we search, we want to scroll to the results area usually
-    const resultsEl = document.getElementById('blog-feed');
-    if (resultsEl) resultsEl.scrollIntoView({ behavior: 'smooth' });
+    // Ensure we are on home to show results, or decide how to show search results.
+    // For now, simpler to stay on home if searching.
+    if (viewState.type !== 'home') {
+        setViewState({ type: 'home' });
+    }
+    
+    setTimeout(() => {
+        const resultsEl = document.getElementById('search-results');
+        if (resultsEl) resultsEl.scrollIntoView({ behavior: 'smooth' });
+    }, 100);
   };
 
-  const handleHomeNavigate = () => {
-    setCurrentView('home');
-    setSelectedArticleId(null);
-    setSearchResults(null);
-    setSelectedTopic(null);
-    // userRole state persists or resets depending on preference, currently persists
+  // -- Render Logic --
+
+  const getActiveArticle = () => {
+      if (viewState.type === 'article') {
+          return INITIAL_ARTICLES.find(a => a.id === viewState.id);
+      }
+      return null;
   };
 
-  const selectedArticle = INITIAL_ARTICLES.find(a => a.id === selectedArticleId);
-
-  // Find recommended articles (same audience or shared tags, excluding current)
+  const selectedArticle = getActiveArticle();
   const relatedArticles = selectedArticle 
     ? INITIAL_ARTICLES
         .filter(a => a.id !== selectedArticle.id && (a.audience === selectedArticle.audience || a.tags.some(t => selectedArticle.tags.includes(t))))
         .slice(0, 3)
     : [];
 
-  // Helper to get article object from ID
-  const getArticleById = (id: string) => INITIAL_ARTICLES.find(a => a.id === id);
-
   return (
     <Layout
       userRole={userRole}
-      onRoleChange={(role) => {
-        setUserRole(role);
-        setSearchResults(null);
-        setSelectedTopic(null);
-        setCurrentView('home');
-      }}
+      onRoleChange={navigateToRoleHub}
       language={language}
       onLanguageChange={setLanguage}
-      onNavigateHome={handleHomeNavigate}
+      onNavigateHome={navigateHome}
+      onNavigateArchive={navigateToArchiveHub}
     >
-      {currentView === 'home' ? (
+      {viewState.type === 'home' && (
         <div className="space-y-16 fade-in pb-12">
           
           {/* 1. Homepage Hero Section */}
           <section className="relative text-center py-20 px-4 -mt-8 bg-slate-900 text-white rounded-b-[3rem] shadow-2xl overflow-hidden">
-             {/* Abstract Background pattern */}
             <div className="absolute inset-0 opacity-20 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-cyan-900 via-slate-900 to-slate-950 pointer-events-none"></div>
             
             <div className="relative z-10 max-w-4xl mx-auto">
@@ -161,7 +165,7 @@ const App: React.FC = () => {
                     ].map((role) => (
                         <button
                             key={role.id}
-                            onClick={() => setUserRole(role.id as UserRole)}
+                            onClick={() => navigateToRoleHub(role.id as UserRole)}
                             className={`p-4 rounded-xl border transition-all flex flex-col items-center gap-3 group ${
                                 userRole === role.id 
                                 ? 'bg-cyan-600 border-cyan-500 text-white shadow-lg scale-105' 
@@ -178,7 +182,7 @@ const App: React.FC = () => {
 
           {/* 2. Recommendations or Featured Section */}
           <section className="container mx-auto px-4">
-              {recommendations.length > 0 ? (
+              {homeRecommendations.length > 0 && !searchResults ? (
                   <div className="fade-in">
                       <div className="flex items-center justify-between mb-6">
                         <h2 className="text-2xl font-bold text-slate-800 flex items-center gap-2">
@@ -187,14 +191,15 @@ const App: React.FC = () => {
                         </h2>
                       </div>
                       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                          {recommendations.map(rec => {
-                              const article = getArticleById(rec.articleId);
+                          {homeRecommendations.slice(0, 3).map(rec => {
+                              const article = INITIAL_ARTICLES.find(a => a.id === rec.articleId);
                               if (!article) return null;
                               return (
                                   <ArticleCard 
                                     key={article.id} 
                                     article={article} 
-                                    onClick={handleArticleClick} 
+                                    onClick={navigateToArticle} 
+                                    onTagClick={navigateToTopicHub}
                                     recommendationReason={rec.reason}
                                   />
                               );
@@ -202,7 +207,6 @@ const App: React.FC = () => {
                       </div>
                   </div>
               ) : (
-                  // Default Featured Carousel
                   !searchResults && (
                     <div>
                         <div className="flex items-center justify-between mb-6">
@@ -214,7 +218,11 @@ const App: React.FC = () => {
                         <div className="flex overflow-x-auto gap-6 pb-6 scrollbar-hide snap-x snap-mandatory">
                             {featuredArticles.map(article => (
                                 <div key={article.id} className="min-w-[300px] md:min-w-[400px] snap-center">
-                                    <ArticleCard article={article} onClick={handleArticleClick} />
+                                    <ArticleCard 
+                                        article={article} 
+                                        onClick={navigateToArticle} 
+                                        onTagClick={navigateToTopicHub}
+                                    />
                                 </div>
                             ))}
                         </div>
@@ -223,76 +231,79 @@ const App: React.FC = () => {
               )}
           </section>
 
-          {/* 3. Blog Feed Section */}
-          <section id="blog-feed" className="container mx-auto px-4 bg-slate-50 rounded-3xl p-4 md:p-8">
+          {/* 3. Search & Explore Section */}
+          <section id="search-results" className="container mx-auto px-4 bg-slate-50 rounded-3xl p-4 md:p-8">
             <div className="max-w-3xl mx-auto text-center mb-10">
                  <h2 className="text-3xl font-bold text-slate-900 mb-4">Explore Knowledge Base</h2>
-                 <p className="text-slate-600 mb-8">Search our library or filter by topic to find exactly what you need.</p>
+                 <p className="text-slate-600 mb-8">Search our library to find exactly what you need.</p>
                  <SearchBar onSearch={handleSearch} isSearching={isSearching} />
             </div>
 
-            {/* Filter Bar */}
-            <div className="flex flex-col md:flex-row items-center justify-between gap-4 mb-8 border-b border-slate-200 pb-4">
-                 <div className="flex items-center gap-2 overflow-x-auto w-full md:w-auto pb-2 md:pb-0">
-                    <Filter className="w-5 h-5 text-slate-400 flex-shrink-0" />
-                    <button 
-                        onClick={() => setSelectedTopic(null)}
-                        className={`px-4 py-2 rounded-full text-sm font-medium transition-colors border whitespace-nowrap ${
-                            selectedTopic === null ? 'bg-slate-900 text-white border-slate-900' : 'bg-white text-slate-600 border-slate-200 hover:border-slate-400'
-                        }`}
-                    >
-                        All Topics
-                    </button>
-                    {availableTopics.map(topic => (
-                        <button 
-                            key={topic}
-                            onClick={() => setSelectedTopic(topic === selectedTopic ? null : topic)}
-                            className={`px-4 py-2 rounded-full text-sm font-medium transition-colors border whitespace-nowrap ${
-                                selectedTopic === topic ? 'bg-cyan-600 text-white border-cyan-600' : 'bg-white text-slate-600 border-slate-200 hover:border-slate-400'
-                            }`}
-                        >
-                            {topic}
-                        </button>
-                    ))}
-                 </div>
-                 
-                 <div className="text-sm text-slate-500 font-medium">
-                     Showing {filteredArticles.length} Articles
-                 </div>
-            </div>
-
-            {/* Results Grid */}
-            {filteredArticles.length > 0 ? (
+            {searchResults ? (
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                {filteredArticles.map((article) => (
+                {INITIAL_ARTICLES
+                    .filter(a => searchResults.includes(a.id))
+                    .sort((a, b) => searchResults.indexOf(a.id) - searchResults.indexOf(b.id))
+                    .map((article) => (
                     <ArticleCard 
-                    key={article.id} 
-                    article={article} 
-                    onClick={handleArticleClick} 
+                        key={article.id} 
+                        article={article} 
+                        onClick={navigateToArticle} 
+                        onTagClick={navigateToTopicHub}
                     />
                 ))}
                 </div>
-            ) : (
-                <div className="text-center py-20 bg-white rounded-xl border-2 border-dashed border-slate-200">
-                    <div className="text-slate-400 mb-2">No articles found</div>
-                    <button onClick={() => {setSearchResults(null); setSelectedTopic(null); setUserRole('all')}} className="text-cyan-600 hover:underline font-medium">
-                        Clear all filters
-                    </button>
-                </div>
-            )}
+            ) : null}
           </section>
         </div>
-      ) : (
-        selectedArticle && (
-          <div className="pt-8 px-4">
-              <ArticleView 
-                article={selectedArticle} 
-                onBack={handleHomeNavigate}
-                relatedArticles={relatedArticles}
-                onArticleClick={handleArticleClick}
-              />
-          </div>
-        )
+      )}
+
+      {viewState.type === 'role-hub' && (
+          <HubView 
+            type="role" 
+            value={viewState.role} 
+            onNavigateArticle={navigateToArticle}
+            onNavigateTopic={navigateToTopicHub}
+          />
+      )}
+
+      {viewState.type === 'topic-hub' && (
+          <HubView 
+            type="topic" 
+            value={viewState.topic} 
+            onNavigateArticle={navigateToArticle}
+            onNavigateTopic={navigateToTopicHub}
+          />
+      )}
+
+      {viewState.type === 'series-hub' && (
+          <HubView 
+            type="series" 
+            value={viewState.series} 
+            onNavigateArticle={navigateToArticle}
+            onNavigateTopic={navigateToTopicHub}
+          />
+      )}
+
+      {viewState.type === 'archive-hub' && (
+          <HubView 
+            type="archive" 
+            value={viewState.date} 
+            onNavigateArticle={navigateToArticle}
+            onNavigateTopic={navigateToTopicHub}
+          />
+      )}
+
+      {viewState.type === 'article' && selectedArticle && (
+        <div className="pt-8 px-4">
+            <ArticleView 
+              article={selectedArticle} 
+              onBack={navigateHome}
+              relatedArticles={relatedArticles}
+              onArticleClick={navigateToArticle}
+              onSeriesClick={navigateToSeriesHub}
+            />
+        </div>
       )}
     </Layout>
   );

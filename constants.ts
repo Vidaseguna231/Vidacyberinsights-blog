@@ -7,6 +7,7 @@ export const INITIAL_ARTICLES: Article[] = [
     title: 'Mastering the Art of Password Hygiene',
     audience: 'student',
     tags: ['Passwords', 'MFA', 'Basics'],
+    series: 'Digital Hygiene 101',
     readTime: '6 min',
     imageUrl: 'https://images.unsplash.com/photo-1563986768609-322da13575f3?auto=format&fit=crop&w=1200&q=80',
     imagePrompt: 'Password manager interface displaying multiple strong, unique passwords; clear lock icon overlay; clean UI; no brand names; neutral dark theme; high contrast; professional tone.',
@@ -106,6 +107,7 @@ Enforce MFA for all remote access and administrative accounts. Prefer Push Notif
     title: 'Ransomware & Resilience: A Business Guide',
     audience: 'business',
     tags: ['Ransomware', 'Cloud Security', 'Compliance'],
+    series: 'Business Resilience',
     readTime: '8 min',
     imageUrl: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1200&q=80',
     imagePrompt: 'Executive dashboard showing ransomware incident response workflow and backup recovery plan.',
@@ -192,6 +194,7 @@ Implement micro-segmentation to prevent lateral movement. If one server is infec
     title: 'Keeping Kids Safe: A Parent’s Guide to Social Media',
     audience: 'parent',
     tags: ['Cyberbullying', 'Parental Controls', 'Social Media'],
+    series: 'Family Safety',
     readTime: '7 min',
     imageUrl: 'https://images.unsplash.com/photo-1543269865-cbf427effbad?auto=format&fit=crop&w=1200&q=80',
     imagePrompt: 'Parent guiding a child on a laptop with social media privacy settings visible on screen.',
@@ -292,6 +295,7 @@ Monitor for algorithmic radicalization and body image issues. Social media algor
     title: 'Teaching Digital Citizenship in Schools',
     audience: 'educator',
     tags: ['Education', 'Digital Citizenship', 'Resources'],
+    series: 'Digital Citizenship',
     readTime: '6 min',
     imageUrl: 'https://images.unsplash.com/photo-1524178232363-1fb2b075b655?auto=format&fit=crop&w=1200&q=80',
     imagePrompt: 'Teacher leading a classroom discussion on digital safety with posters about online privacy.',
@@ -372,6 +376,7 @@ Utilize free resources from **CISA's NICCS** (National Initiative for Cybersecur
     title: 'What is Multi-Factor Authentication (MFA)?',
     audience: 'all',
     tags: ['MFA', 'Basics', 'Security Tools'],
+    series: 'Digital Hygiene 101',
     readTime: '5 min',
     imageUrl: 'https://images.unsplash.com/photo-1618060932014-4deda4932554?auto=format&fit=crop&w=1200&q=80',
     imagePrompt: 'Login screen showing MFA with password entry and phone verification code side by side.',
@@ -468,54 +473,83 @@ To combat sophisticated attacks, organizations should move towards FIDO2 standar
     title: 'Phishing 101: Don\'t Take the Bait',
     audience: 'student',
     tags: ['Phishing', 'Email', 'Scams'],
-    readTime: '3 min',
+    series: 'Threat Awareness',
+    readTime: '6 min',
     imageUrl: 'https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=1200&q=80',
-    imagePrompt: 'A hacker silhouette in a hoodie working on a laptop with binary code background.',
-    altText: 'Silhouette of a person in a hoodie typing on a laptop with digital code overlays.',
+    imagePrompt: 'A shadowy figure using a laptop with digital binary code overlays, representing a hacker.',
+    altText: 'Conceptual illustration of a phishing attempt with digital code and a hacker silhouette.',
     author: 'Tech Team',
     publishDate: 'Feb 02, 2024',
-    summary: 'Learn how to spot fake emails and texts that try to steal your login info. If it looks too good to be true, it probably is.',
+    summary: 'Phishing is the #1 way hackers get into systems. Learn how to spot fake emails, texts, and websites before you click.',
+    seoDescription: 'A complete guide to recognizing and preventing phishing attacks. Learn about spear phishing, smishing, and how to verify suspicious emails.',
+    seoKeywords: ['phishing', 'email scams', 'cybersecurity basics', 'smishing', 'social engineering'],
     content: `
-## Something Smells Fishy
+## The Hook, The Line, and The Sinker
 
-Phishing is when scammers pretend to be someone you trust (like your bank or Netflix) to get your password.
+Phishing is a cyber attack where scammers disguise themselves as trustworthy entities—like your bank, your school, or even Netflix—to trick you into revealing sensitive information.
 
-### Red Flags
-* **Typos**: "Netfllix" instead of "Netflix".
-* **Urgency**: "Your account will be deleted in 1 hour!"
-* **Suspicious Links**: Hover over links before clicking.
+It is called "Phishing" because the bad guys throw out bait (a fake email) and wait for a fish (you) to bite (click the link).
 
-### What to do?
-Report it as spam and delete it. Never click links in unexpected emails.
+### Anatomy of a Phishing Email
+
+How do you spot a fake? Look for these signs:
+
+1.  **The Sender's Address**: The display name might say "Netflix Support," but if you look closely at the email address, it says \`netflix-support@gmail.com\` or \`admin@netflix-security-update.com\`. Real companies send emails from their official domain (e.g., \`@netflix.com\`).
+2.  **Generic Greetings**: Real companies usually use your name ("Hi Sarah"). Scammers often use "Dear Customer" or "Dear Member".
+3.  **Urgency and Threats**: Scammers want you to panic so you don't think clearly.
+    *   "Your account will be deleted in 24 hours!"
+    *   "Unauthorized login detected! Click here to fix."
+4.  **Suspicious Links**: Hover your mouse over the button or link (don't click!). The little preview box will show the real destination. If it looks like \`http://login-secure-update.xyz\`, it's a trap.
+
+### Beyond Email: Smishing and Vishing
+
+*   **Smishing (SMS Phishing)**: Fake text messages. "USPS: Your package cannot be delivered due to incomplete address. Click here."
+*   **Vishing (Voice Phishing)**: Fake phone calls. "This is the IRS. You owe taxes and must pay with a gift card."
+
+### What To Do If You Spot One?
+
+1.  **Don't Click**: Never click links or download attachments.
+2.  **Verify**: If you aren't sure, go to the company's real website by typing it into your browser. Do not use the link in the email.
+3.  **Report**: Most email providers have a "Report Phishing" button. Use it!
+
+### Recommended Next Reads
+*   **Mastering the Art of Password Hygiene** - Even if you accidentally click, MFA can stop the hacker from getting in.
+*   **Keeping Kids Safe on Social Media** - Phishing happens in Instagram DMs too.
     `,
     contentBeginner: `
 ## Don't Get Tricked!
 
-"Phishing" is a trick where bad guys send fake emails. They want you to click a link so they can steal your password.
+"Phishing" is a trick where bad guys send fake emails or texts. They want you to click a link so they can steal your password or money.
 
 ### How to Spot a Fake
-1. **Spelling Mistakes**: Bad guys often spell words wrong.
-2. **Scary Warnings**: They might say "Your account is banned!" to scare you. Don't panic.
-3. **Weird Links**: If you don't know who sent it, don't click it.
+1.  **Spelling Mistakes**: Real companies check their spelling. Bad guys often make mistakes.
+2.  **Scary Warnings**: They might say "Your account is banned!" to scare you. Don't panic. It is a trick.
+3.  **Weird Links**: If you don't know who sent it, don't click it.
+
+### Text Message Tricks
+Have you ever gotten a text saying "You won a free iPhone"? That is a lie. They just want you to click the link so they can hack your phone.
 
 ### Stay Safe
 If you get a weird email, tell a parent or teacher. Delete the email and forget about it!
     `,
     contentAdvanced: `
-## Advanced Phishing Vectors
+## Social Engineering Vectors
 
-Phishing remains the primary entry point for APTs (Advanced Persistent Threats). Modern attacks go beyond generic spam.
+Phishing remains the primary entry point for APTs (Advanced Persistent Threats) and ransomware deployment. It exploits human psychology rather than technical vulnerabilities.
 
-### Spear Phishing & Whaling
-Targeted attacks against specific individuals or C-suite executives using OSINT (Open Source Intelligence) to craft convincing narratives.
+### Advanced Phishing Types
+*   **Spear Phishing**: Highly targeted attacks against specific individuals. Attackers use OSINT (Open Source Intelligence) from LinkedIn or social media to craft convincing narratives (e.g., referencing a recent conference the target attended).
+*   **Whaling**: Targeting C-suite executives (CEO, CFO) to authorize wire transfers or reveal sensitive IP.
+*   **Business Email Compromise (BEC)**: Impersonating a vendor or executive to request fraudulent payments.
 
-### Technical Indicators (IOCs)
-* **Homoglyphs**: Using look-alike characters in domains (e.g., using Cyrillic 'a' in amazon.com).
-* **Punytags**: Obfuscated URLs.
-* **DKIM/SPF Failures**: Emails originating from unauthorized IP ranges.
+### Technical Controls (IOCs)
+*   **Homoglyphs**: Using look-alike characters in domains (e.g., using Cyrillic 'a' in \`amazon.com\`).
+*   **Punytags**: Obfuscated URLs using Punycode.
+*   **Email Auth**: Implement **SPF**, **DKIM**, and **DMARC** to prevent domain spoofing.
+*   **Sandboxing**: Use email gateways that detonate attachments in a sandbox environment before delivery.
 
 ### Mitigation Strategies
-Implement FIDO2 hardware keys to neutralize credential harvesting attacks. Even if a user is fooled by the site, the hardware token cannot be Phished.
+Implement FIDO2 hardware keys (YubiKeys) to neutralize credential harvesting. Even if a user is fooled by the site visually, the hardware token cannot be Phished because the domain origin will not match the cryptographic signature.
     `
   },
   {
@@ -523,23 +557,48 @@ Implement FIDO2 hardware keys to neutralize credential harvesting attacks. Even 
     title: 'Small Business Cyber Defense Checklist',
     audience: 'business',
     tags: ['Basics', 'Checklist', 'Strategy'],
-    readTime: '8 min',
+    series: 'Business Resilience',
+    readTime: '10 min',
     imageUrl: 'https://images.unsplash.com/photo-1600880292203-757bb62b4baf?auto=format&fit=crop&w=1200&q=80',
     imagePrompt: 'A diverse group of business colleagues discussing a document in a bright office.',
-    altText: 'Business professionals having a meeting in a conference room.',
+    altText: 'Diverse business team discussing cybersecurity strategy in a modern office.',
     author: 'Dr. Aris Thorne',
     publishDate: 'Feb 10, 2024',
     summary: 'A step-by-step checklist to secure your small business assets without breaking the bank.',
+    seoDescription: 'The ultimate cybersecurity checklist for small businesses. Covers MFA, backups, employee training, and firewall configuration for SMEs.',
+    seoKeywords: ['small business cybersecurity', 'cyber defense checklist', 'SMB security', 'cyber risk management', 'employee training'],
     content: `
 ## Security on a Budget
 
-You don't need a million-dollar budget to be secure.
+You don't need a million-dollar budget to be secure. In fact, most breaches occur because basic hygiene was ignored, not because the attacker used a "zero-day" super weapon.
 
-### The Checklist
-1. **Enable MFA** on all business email accounts.
-2. **Patch Management**: Turn on auto-updates for all OS and software.
-3. **Backups**: Implement the 3-2-1 backup rule (3 copies, 2 media types, 1 offsite).
-4. **Employee Training**: Train staff to recognize CEO fraud and invoice scams.
+This checklist covers the high-impact, low-cost controls that stop 90% of attacks.
+
+### 1. Identity First (The Front Door)
+*   [ ] **Enable MFA Everywhere**: Email, Banking, Payroll, Social Media. No exceptions.
+*   [ ] **Kill Shared Accounts**: Stop using \`admin@company.com\` shared by 5 people. Everyone gets their own login.
+*   [ ] **Offboarding Process**: When an employee leaves, their access must be revoked *immediately*.
+
+### 2. Protect Your Devices (The House)
+*   [ ] **Patch Management**: Turn on "Automatic Updates" for Windows, macOS, and mobile devices. Unpatched software is an open door.
+*   [ ] **Antivirus / EDR**: Use Windows Defender (it's free and good) or a paid Endpoint Detection and Response tool.
+*   [ ] **Disk Encryption**: Turn on BitLocker (Windows) or FileVault (Mac). If a laptop is stolen, the data is useless to the thief.
+
+### 3. Data Resilience (The Insurance)
+*   [ ] **3-2-1 Backups**: Keep 3 copies of data, on 2 different media, with 1 offsite.
+*   [ ] **Test Your Backups**: A backup you haven't tested is just a wish. Try to restore a file once a month.
+
+### 4. Network Security (The Fence)
+*   [ ] **Separate Guest Wi-Fi**: Customers should not be on the same Wi-Fi network as your point-of-sale system or back-office computers.
+*   [ ] **Change Default Passwords**: Your router's password should not be "admin".
+
+### 5. The Human Firewall (The Guards)
+*   [ ] **Training**: Train staff to recognize CEO fraud (emails asking for gift cards).
+*   [ ] **Reporting Culture**: Encourage employees to report mistakes (like clicking a link) without fear of being fired. Speed matters in response.
+
+### Recommended Next Reads
+*   **Ransomware & Resilience: A Business Guide** - Why those backups are your most important asset.
+*   **Phishing 101** - Share this with your team for their next training session.
     `,
     contentBeginner: `
 ## Protecting Your Business
@@ -547,21 +606,30 @@ You don't need a million-dollar budget to be secure.
 Keeping your business safe doesn't have to be hard or expensive. Follow these simple steps.
 
 ### Simple Steps
-1. **Two Locks are Better than One**: Turn on "Multi-Factor Authentication" (MFA) for email. It sends a code to your phone when you log in.
-2. **Update Everything**: When your computer says "Update Available", do it immediately. These updates fix security holes.
-3. **Save Copies**: Keep copies of your important files on a hard drive AND in the cloud.
-4. **Teach Your Team**: Tell your employees never to buy gift cards if "the boss" emails them asking for it.
+1.  **Two Locks are Better than One**: Turn on "Multi-Factor Authentication" (MFA) for email. It sends a code to your phone when you log in.
+2.  **Update Everything**: When your computer says "Update Available", do it immediately. These updates fix security holes.
+3.  **Save Copies**: Keep copies of your important files on a hard drive AND in the cloud.
+4.  **Teach Your Team**: Tell your employees never to buy gift cards if "the boss" emails them asking for it.
+5.  **Separate Wi-Fi**: Don't let customers use the same Wi-Fi as your cash register.
     `,
     contentAdvanced: `
 ## SMB Cybersecurity Framework
 
-Implementing a security posture based on the NIST CSF (Cybersecurity Framework) Identify, Protect, Detect, Respond, Recover.
+Implementing a security posture based on the NIST CSF (Cybersecurity Framework): Identify, Protect, Detect, Respond, Recover.
 
 ### Implementation Strategy
-1. **Asset Management**: Maintain an automated inventory of all hardware and software assets. You cannot protect what you don't know you have.
-2. **Vulnerability Management**: Schedule weekly automated scans and prioritize patching based on CVSS scores.
-3. **Disaster Recovery (DR)**: Test your backups quarterly. A backup is not a backup unless a restore has been verified.
-4. **Endpoint Detection and Response (EDR)**: Deploy lightweight EDR agents instead of legacy antivirus for behavior-based threat detection.
+
+#### Asset Management (Identify)
+Maintain an automated inventory of all hardware and software assets. You cannot protect what you don't know you have. Shadow IT is a major risk.
+
+#### Vulnerability Management (Protect)
+Schedule weekly automated scans. Prioritize patching based on CVSS scores, not just "criticality". Ensure third-party applications (Chrome, Adobe) are also patched, not just the OS.
+
+#### Disaster Recovery (Recover)
+Test your backups quarterly. A backup is not a backup unless a restore has been verified. Measure your RTO (Recovery Time Objective) and RPO (Recovery Point Objective).
+
+#### Endpoint Detection (Detect)
+Deploy lightweight EDR agents instead of legacy antivirus. EDR looks for *behavior* (e.g., PowerShell deleting backups) rather than just *signatures* of known viruses.
     `
   }
 ];
