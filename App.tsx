@@ -4,12 +4,13 @@ import Layout from './components/Layout';
 import ArticleCard from './components/ArticleCard';
 import ArticleView from './components/ArticleView';
 import HubView from './components/HubView';
+import RoadmapView from './components/RoadmapView';
 import SearchBar from './components/SearchBar';
 import { INITIAL_ARTICLES } from './constants';
 import { Article, UserRole, Language, UserProfile, Recommendation } from './types';
 import { searchArticles } from './services/geminiService';
 import { getRecommendations } from './services/recommendationService';
-import { Filter, GraduationCap, Users, Briefcase, School, Star, Sparkles } from 'lucide-react';
+import { Filter, GraduationCap, Users, Briefcase, School, Star, Sparkles, Map } from 'lucide-react';
 
 type ViewState = 
   | { type: 'home' }
@@ -17,7 +18,8 @@ type ViewState =
   | { type: 'role-hub'; role: UserRole }
   | { type: 'topic-hub'; topic: string }
   | { type: 'series-hub'; series: string }
-  | { type: 'archive-hub'; date: string };
+  | { type: 'archive-hub'; date: string }
+  | { type: 'roadmap' };
 
 const App: React.FC = () => {
   const [viewState, setViewState] = useState<ViewState>({ type: 'home' });
@@ -32,6 +34,7 @@ const App: React.FC = () => {
   // Update document title based on view
   useEffect(() => {
     if (viewState.type === 'home') document.title = 'Vidacyberinsights - Global Cybersecurity Awareness';
+    if (viewState.type === 'roadmap') document.title = 'Learning Roadmap - Vidacyberinsights';
   }, [viewState]);
 
   // Update recommendations when role changes (Only relevant for Home view mostly)
@@ -87,6 +90,11 @@ const App: React.FC = () => {
     window.scrollTo(0, 0);
   }
 
+  const navigateToRoadmap = () => {
+    setViewState({ type: 'roadmap' });
+    window.scrollTo(0, 0);
+  }
+
   const navigateHome = () => {
     setViewState({ type: 'home' });
     setSearchResults(null);
@@ -135,6 +143,7 @@ const App: React.FC = () => {
       onLanguageChange={setLanguage}
       onNavigateHome={navigateHome}
       onNavigateArchive={navigateToArchiveHub}
+      onNavigateRoadmap={navigateToRoadmap}
     >
       {viewState.type === 'home' && (
         <div className="space-y-16 fade-in pb-12">
@@ -154,6 +163,16 @@ const App: React.FC = () => {
                 <p className="text-slate-300 max-w-2xl mx-auto mb-10 text-lg leading-relaxed">
                 Vidacyberinsights provides accessible, multilingual, and role-based education to help you navigate the digital world safely.
                 </p>
+
+                <div className="flex justify-center mb-12">
+                     <button 
+                        onClick={navigateToRoadmap}
+                        className="px-8 py-3 bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-white rounded-full font-bold shadow-lg shadow-cyan-500/30 transition-all hover:scale-105 flex items-center gap-2"
+                     >
+                         <Map className="w-5 h-5" />
+                         Start Learning Path
+                     </button>
+                </div>
 
                 {/* Main Role Selector Cards */}
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-3xl mx-auto">
@@ -258,6 +277,10 @@ const App: React.FC = () => {
         </div>
       )}
 
+      {viewState.type === 'roadmap' && (
+          <RoadmapView onNavigateArticle={navigateToArticle} />
+      )}
+
       {viewState.type === 'role-hub' && (
           <HubView 
             type="role" 
@@ -295,7 +318,7 @@ const App: React.FC = () => {
       )}
 
       {viewState.type === 'article' && selectedArticle && (
-        <div className="pt-8 px-4">
+        <div className="w-full">
             <ArticleView 
               article={selectedArticle} 
               onBack={navigateHome}

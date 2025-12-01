@@ -12,6 +12,7 @@ export const INITIAL_ARTICLES: Article[] = [
     imageUrl: 'https://images.unsplash.com/photo-1563986768609-322da13575f3?auto=format&fit=crop&w=1200&q=80',
     imagePrompt: 'Password manager interface displaying multiple strong, unique passwords; clear lock icon overlay; clean UI; no brand names; neutral dark theme; high contrast; professional tone.',
     altText: 'Password manager interface displaying strong, unique passwords with security lock symbol.',
+    imageCaption: 'Modern password managers secure your digital identity with military-grade encryption.',
     author: 'Sarah Jenkins',
     publishDate: 'Oct 12, 2023',
     summary: 'Stop using "password123". Learn how to create unbreakable passwords and why MFA is your best friend.',
@@ -112,6 +113,7 @@ Enforce MFA for all remote access and administrative accounts. Prefer Push Notif
     imageUrl: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1200&q=80',
     imagePrompt: 'Executive dashboard showing ransomware incident response workflow and backup recovery plan.',
     altText: 'Business dashboard illustrating ransomware response and resilience planning.',
+    imageCaption: 'Real-time threat monitoring dashboards allow executives to visualize and mitigate risks.',
     author: 'Dr. Aris Thorne',
     publishDate: 'Nov 05, 2023',
     summary: 'An executive overview of modern ransomware threats and how cloud security posture management (CSPM) reduces risk.',
@@ -199,6 +201,7 @@ Implement micro-segmentation to prevent lateral movement. If one server is infec
     imageUrl: 'https://images.unsplash.com/photo-1543269865-cbf427effbad?auto=format&fit=crop&w=1200&q=80',
     imagePrompt: 'Parent guiding a child on a laptop with social media privacy settings visible on screen.',
     altText: 'Parent helping child adjust social media privacy settings on a laptop.',
+    imageCaption: 'Open conversations and privacy settings are the foundations of digital safety for families.',
     author: 'Maria Gonzales',
     publishDate: 'Sept 28, 2023',
     summary: 'Practical tips for managing screen time, spotting cyberbullying, and configuring privacy settings for your children.',
@@ -300,6 +303,7 @@ Monitor for algorithmic radicalization and body image issues. Social media algor
     imageUrl: 'https://images.unsplash.com/photo-1524178232363-1fb2b075b655?auto=format&fit=crop&w=1200&q=80',
     imagePrompt: 'Teacher leading a classroom discussion on digital safety with posters about online privacy.',
     altText: 'Teacher guiding students in a classroom digital citizenship lesson with safety posters.',
+    imageCaption: 'Interactive classroom activities help students understand their permanent digital footprint.',
     author: 'James Wilson',
     publishDate: 'Jan 15, 2024',
     summary: 'Lesson plans and interactive activities to engage students in conversations about their digital footprint and safety.',
@@ -381,6 +385,7 @@ Utilize free resources from **CISA's NICCS** (National Initiative for Cybersecur
     imageUrl: 'https://images.unsplash.com/photo-1618060932014-4deda4932554?auto=format&fit=crop&w=1200&q=80',
     imagePrompt: 'Login screen showing MFA with password entry and phone verification code side by side.',
     altText: 'Login interface demonstrating multi-factor authentication with password and phone verification.',
+    imageCaption: 'Two-factor authentication adds a critical layer of defense beyond just a password.',
     author: 'Vidacyberinsights Team',
     publishDate: 'Mar 10, 2024',
     summary: 'Passwords aren\'t enough anymore. Learn how MFA adds a second lock to your digital door and why you need it enabled everywhere.',
@@ -478,6 +483,7 @@ To combat sophisticated attacks, organizations should move towards FIDO2 standar
     imageUrl: 'https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=1200&q=80',
     imagePrompt: 'A shadowy figure using a laptop with digital binary code overlays, representing a hacker.',
     altText: 'Conceptual illustration of a phishing attempt with digital code and a hacker silhouette.',
+    imageCaption: 'Hackers operate in the shadows, using code and psychology to breach defenses.',
     author: 'Tech Team',
     publishDate: 'Feb 02, 2024',
     summary: 'Phishing is the #1 way hackers get into systems. Learn how to spot fake emails, texts, and websites before you click.',
@@ -562,6 +568,7 @@ Implement FIDO2 hardware keys (YubiKeys) to neutralize credential harvesting. Ev
     imageUrl: 'https://images.unsplash.com/photo-1600880292203-757bb62b4baf?auto=format&fit=crop&w=1200&q=80',
     imagePrompt: 'A diverse group of business colleagues discussing a document in a bright office.',
     altText: 'Diverse business team discussing cybersecurity strategy in a modern office.',
+    imageCaption: 'Collaborative security strategies protect small business assets and foster a culture of safety.',
     author: 'Dr. Aris Thorne',
     publishDate: 'Feb 10, 2024',
     summary: 'A step-by-step checklist to secure your small business assets without breaking the bank.',
@@ -630,6 +637,346 @@ Test your backups quarterly. A backup is not a backup unless a restore has been 
 
 #### Endpoint Detection (Detect)
 Deploy lightweight EDR agents instead of legacy antivirus. EDR looks for *behavior* (e.g., PowerShell deleting backups) rather than just *signatures* of known viruses.
+    `
+  },
+  {
+    id: '8',
+    title: 'What is Cybersecurity? A Friendly Guide',
+    audience: 'all',
+    tags: ['Basics', 'Fundamentals', 'Intro'],
+    series: 'Foundations',
+    readTime: '4 min',
+    imageUrl: 'https://images.unsplash.com/photo-1555949963-aa79dcee981c?auto=format&fit=crop&w=1200&q=80',
+    imagePrompt: 'Simple illustration of a digital lock protecting a phone, laptop, and cloud icons.',
+    altText: 'Digital security lock protecting personal devices and cloud services.',
+    imageCaption: 'Cybersecurity is the practice of locking your digital doors just like your physical ones.',
+    author: 'Vidacyberinsights Team',
+    publishDate: 'Mar 15, 2024',
+    summary: 'A simple, jargon-free guide to what cybersecurity actually is, why it matters to you (yes, you!), and how it protects your money and privacy.',
+    seoDescription: 'An introduction to cybersecurity for everyone. Learn the basics of protecting your phone, money, and data from online threats.',
+    seoKeywords: ['what is cybersecurity', 'cyber safety basics', 'beginner cybersecurity', 'internet safety intro'],
+    content: `
+## It's Not Just for "Techies"
+
+When people hear "cybersecurity," they often think of hackers in hoodies, scrolling green code, and big corporate firewalls. But in reality, cybersecurity is for everyone who owns a smartphone, sends an email, or uses M-Pesa.
+
+**Cybersecurity is simply the practice of protecting your digital life from theft and damage.**
+
+Just like you lock your house to protect your TV and furniture, you use cybersecurity tools to protect your photos, your messages, and your money.
+
+### What Are We Protecting?
+
+1.  **Your Money**: Banking apps, mobile wallets, and credit card numbers.
+2.  **Your Privacy**: Your private chats, medical records, and location.
+3.  **Your Identity**: Your national ID number and reputation.
+
+### How Do Attacks Happen?
+
+Bad guys usually don't "break" the technology; they trick the people using it.
+*   **Phishing**: Tricking you into clicking a link (like a fake delivery text).
+*   **Weak Passwords**: Guessing "123456" to get into your account.
+*   **Unpatched Devices**: Using flaws in old software to sneak in.
+
+### The 4 Pillars of Protection
+
+You don't need to be an expert to be safe. You just need to master these four habits:
+1.  **Strong Passwords**: Use long, unique phrases (and a Password Manager).
+2.  **MFA**: Add a second lock (like a code on your phone) to your accounts.
+3.  **Updates**: Click "Update Now" whenever your phone asks. It patches the holes.
+4.  **Backups**: Keep a copy of your photos in the cloud or on a drive, just in case.
+
+### How Vidacyberinsights Helps
+We have built learning paths for everyone:
+*   **Students**: Learn to protect your social media and future career.
+*   **Parents**: Keep your family safe online.
+*   **Businesses**: Protect your customers and your revenue.
+
+### Recommended Next Reads
+*   **Why Learn Cybersecurity?** - Understand the real-world impact of digital safety.
+*   **Mastering the Art of Password Hygiene** - Your first practical step.
+    `,
+    contentBeginner: `
+## Locking Your Digital House
+
+Cybersecurity is just a big word for "safety online". 
+
+Think about your phone. It has pictures of your family, your messages to friends, and maybe even your bank app. You wouldn't hand your unlocked phone to a stranger on the street, right?
+
+**Cybersecurity is the digital lock on that phone.**
+
+### Why It Matters
+*   **Keep Money Safe**: Bad guys want to steal money from your accounts.
+*   **Keep Secrets Safe**: You don't want strangers reading your texts.
+
+### How to Stay Safe
+1.  **Lock it Up**: Use a good password, not "1234".
+2.  **Double Check**: Turn on 2-step verification (MFA).
+3.  **Update**: When your phone says "Update Ready", do it!
+    `,
+    contentAdvanced: `
+## Defining Information Security
+
+Cybersecurity, or Information Security (InfoSec), is the practice of ensuring the **Confidentiality, Integrity, and Availability (CIA Triad)** of information systems.
+
+### The CIA Triad
+1.  **Confidentiality**: Preventing unauthorized access (e.g., Encryption, Access Control Lists).
+2.  **Integrity**: Ensuring data has not been tampered with (e.g., Hashing, Digital Signatures).
+3.  **Availability**: Ensuring systems are up and running when needed (e.g., DDoS protection, Redundancy).
+
+### The Threat Landscape
+Modern threats are asymmetric. A single individual with a laptop can cause significant disruption to global infrastructure.
+*   **Cybercrime**: Financially motivated (Ransomware, Fraud).
+*   **Cyber Espionage**: Nation-state actors stealing IP or intelligence.
+*   **Hacktivism**: Ideologically motivated disruption.
+
+### Defense in Depth
+Effective security relies on layering controls:
+*   **Physical**: Guards, locks.
+*   **Technical**: Firewalls, EDR, Encryption.
+*   **Administrative**: Policies, User Training.
+    `
+  },
+  {
+    id: '9',
+    title: 'Why Learn Cybersecurity? Protect Your Life, Family, and Work',
+    audience: 'all',
+    tags: ['Basics', 'Motivation', 'Career'],
+    series: 'Foundations',
+    readTime: '5 min',
+    imageUrl: 'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1200&q=80',
+    imagePrompt: 'People using devices safely with privacy and MFA icons, friendly inclusive scene.',
+    altText: 'People practicing safe digital habits with privacy and MFA visuals.',
+    imageCaption: 'Digital safety brings peace of mind, allowing you to connect and work without fear.',
+    author: 'Vidacyberinsights Team',
+    publishDate: 'Mar 16, 2024',
+    summary: 'From protecting your bank account to keeping your family safe, here is why cybersecurity is the most important life skill of the 21st century.',
+    seoDescription: 'Discover the personal, professional, and family benefits of learning cybersecurity. Learn how digital skills protect your finances and future.',
+    seoKeywords: ['why learn cybersecurity', 'cyber awareness benefits', 'digital literacy importance', 'protecting family online'],
+    content: `
+## The Skill You Can't Afford to Ignore
+
+We live our lives online. We work on Zoom, learn on Google Classroom, chat on WhatsApp, and bank on our phones. The internet is amazing, but it has created a new kind of risk. Learning cybersecurity isn't just about computers; it's about protecting your way of life.
+
+### 1. Protect Your Finances
+The most immediate reason to learn is your wallet. Cybercrime is a trillion-dollar industry. Scammers are experts at tricking people into handing over credit card details or M-Pesa PINs.
+*   **The Skill**: Learning to spot a phishing text can save you thousands of shillings in seconds.
+
+### 2. Protect Your Family
+For parents, the internet is a scary place. Predators, bullies, and inappropriate content are real risks.
+*   **The Skill**: Configuring parental controls and having open talks about digital safety empowers your kids to explore safely.
+
+### 3. Protect Your Career
+Every job is now a tech job. Whether you are a lawyer, a doctor, or a shopkeeper, you handle data.
+*   **The Skill**: Businesses hire people who understand data privacy. Being "cyber-aware" makes you a more valuable employee. If you own a business, it keeps you from going bankrupt due to a hack.
+
+### 4. Peace of Mind
+Anxiety about being hacked is real. When you know how to secure your accounts (Password Manager + MFA), you stop worrying. You sleep better knowing your digital house is locked.
+
+### Start Small
+You don't need to become a coder. Start with one small habit today:
+1.  Change your email password to a long passphrase.
+2.  Enable MFA on your banking app.
+
+### Recommended Next Reads
+*   **Start Here: Your Cybersecurity Learning Path** - Follow our guided roadmap to build your skills step-by-step.
+*   **Secure Your Router in 5 Steps** - Your first technical project to secure your home.
+    `,
+    contentBeginner: `
+## Why Should You Care?
+
+You lock your front door to stop robbers. Cybersecurity is just locking your phone to stop digital robbers.
+
+### Money
+Bad guys want your money. If you learn the basics, like how to spot a fake message, you keep your money safe.
+
+### Family
+If you have kids, you want them to be safe when they watch videos or play games. Learning about safety settings helps you protect them.
+
+### No Stress
+When you know your accounts are safe, you don't have to worry. It feels good to be in control!
+    `,
+    contentAdvanced: `
+## The ROI of Cyber Literacy
+
+For individuals and organizations, cyber literacy is a risk management investment.
+
+### Economic Impact
+*   **Individual**: Identity theft recovery takes an average of 6 months and significant legal fees. Prevention is cost-neutral.
+*   **Business**: The average cost of a data breach for an SMB is over $100k, often leading to insolvency.
+
+### Compliance & Legal
+With data protection laws like **GDPR** (Europe) and **Data Protection Act** (Kenya), ignorance is not a defense. Understanding the basics of data sovereignty and privacy is a legal requirement for anyone handling PII (Personally Identifiable Information).
+
+### The "Human Firewall"
+Technology alone cannot stop attacks. The human element is often the weakest link. By upskilling yourself or your workforce, you turn that weakness into a formidable defense layer known as the "Human Firewall."
+    `
+  },
+  {
+    id: '10',
+    title: 'Secure Your Router in 5 Steps',
+    audience: 'all',
+    tags: ['Basics', 'Network Security', 'Home Safety'],
+    series: 'Home Security',
+    readTime: '8 min',
+    imageUrl: 'https://images.unsplash.com/photo-1558036117-15d82a90b9b1?auto=format&fit=crop&w=1600&q=80',
+    imagePrompt: 'Modern home Wi‑Fi router on a desk with a subtle lock icon overlay; secure settings UI visible; neutral, professional style; high contrast; no brand logos.',
+    altText: 'Home Wi‑Fi router secured with strong password and WPA3 encryption.',
+    imageCaption: 'Your router is the front door to your digital home; keep it locked tight.',
+    author: 'Tech Team',
+    publishDate: 'Mar 18, 2024',
+    summary: 'Your Wi-Fi router is the gateway to your home. Learn 5 simple steps to lock it down and keep intruders out of your personal network.',
+    seoDescription: 'Learn 5 simple steps to secure your home Wi-Fi router. A guide to WPA3, firmware updates, and guest networks to protect your digital life.',
+    seoKeywords: ['router security', 'wifi safety', 'secure home network', 'WPA3', 'internet safety tips'],
+    content: `
+## The Gatekeeper of Your Home
+
+Every device in your house—your phone, your laptop, your smart TV, maybe even your fridge—connects to the internet through one box: **Your Router**.
+
+If a hacker controls your router, they control the traffic to all those devices. They can redirect you to fake banking sites or spy on your browsing. Yet, most people plug their router in and never touch the settings again.
+
+Here are 5 simple steps to lock it down.
+
+### Step 1: Change the Default Password
+Routers come with a default password (often written on a sticker on the bottom). Hackers know these defaults. If you haven't changed the login password for the *router itself* (not just the Wi-Fi password), do it now.
+*   **How**: Type your router's IP address (usually \`192.168.0.1\` or \`192.168.1.1\`) into a browser. Log in and find "Change Administrator Password."
+
+### Step 2: Enable WPA3 (or WPA2-AES)
+This is the encryption language your router uses.
+*   **Avoid**: WEP (Ancient, broken in seconds) and WPA (Old).
+*   **Use**: **WPA3** is the newest and safest. If your router is older, **WPA2-AES** is still good.
+
+### Step 3: Update the Firmware
+Your router runs software called "Firmware." Like your phone, it needs updates to fix security holes.
+*   **Action**: Log into your router and look for "Firmware Update." Some modern routers do this automatically—check if "Auto-Update" is on.
+
+### Step 4: Disable WPS
+WPS (Wi-Fi Protected Setup) is that little button that lets you connect without a password. It is convenient, but it has a major security flaw that lets hackers brute-force their way in.
+*   **Action**: Go to settings and turn **WPS** to **OFF**.
+
+### Step 5: Set Up a Guest Network
+Do you have friends over? Or smart home devices like cheap lightbulbs? Put them on a "Guest Network."
+*   **Why**: A Guest Network gives them internet access but stops them from seeing your private files or accessing your main computer. It isolates untrusted devices.
+
+### Weekly Check
+Once a week, just glance at your router's "Connected Devices" list. See anything you don't recognize? Kick it off and change the password!
+
+### Recommended Next Reads
+*   **Mastering the Art of Password Hygiene** - Use a strong passphrase for that new Wi-Fi password!
+*   **What is Multi-Factor Authentication?** - Layer 2 of your defense.
+    `,
+    contentBeginner: `
+## Locking Your Wi-Fi
+
+Your Wi-Fi box (Router) is like the front door to your internet. You need to lock it!
+
+### 5 Easy Steps
+1.  **Change the Admin Password**: The password to change settings shouldn't be "admin". Make it a secret!
+2.  **Use WPA2 or WPA3**: This is a setting that scrambles your data so neighbors can't read it.
+3.  **Update It**: Just like your phone needs updates, your router does too. Look for an "Update" button in the app.
+4.  **Turn off WPS**: There is a button called WPS that is easy to break. Turn it off in settings.
+5.  **Use a Guest Network**: When friends come over, let them use the "Guest" Wi-Fi. It keeps your private computer safe.
+
+### Quick Tip
+If your internet is slow, check who is connected. Maybe a neighbor is stealing your Wi-Fi! Change the password to kick them off.
+    `,
+    contentAdvanced: `
+## Hardening SOHO Network Infrastructure
+
+Small Office/Home Office (SOHO) routers are frequent targets for botnets (like Mirai). Hardening the perimeter is essential.
+
+### Advanced Configuration
+1.  **Disable UPnP (Universal Plug and Play)**: UPnP allows devices to automatically open ports on the firewall. This is a massive security risk. Manage port forwarding manually if absolutely necessary.
+2.  **Remote Management**: Ensure "Remote Administration" (WAN-side access) is disabled. You should only be able to configure the router from the LAN.
+3.  **DNS Over HTTPS (DoH)**: Configure the router to use a privacy-focused DNS provider (like Cloudflare 1.1.1.1 or Quad9) that supports DoH, preventing ISP snooping and DNS poisoning.
+4.  **Network Segmentation**: Utilize VLANs if your hardware supports it. Isolate IoT devices on a separate VLAN with restricted internet access and no route to the main LAN.
+    `
+  },
+  {
+    id: '11',
+    title: 'TikTok & Instagram Privacy for Teens',
+    audience: 'parent',
+    tags: ['Social Media', 'Privacy', 'Teens'],
+    series: 'Family Safety',
+    readTime: '7 min',
+    imageUrl: 'https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=1200&q=80',
+    imagePrompt: 'Parent guiding teenager on a laptop with privacy settings visible for TikTok and Instagram.',
+    altText: 'Parent helping teen adjust social media privacy settings on a laptop.',
+    imageCaption: 'Guiding teens through privacy settings empowers them to take control of their digital footprint.',
+    author: 'Maria Gonzales',
+    publishDate: 'Mar 20, 2024',
+    summary: 'A step-by-step guide for parents to help teens configure privacy settings on TikTok and Instagram, manage screen time, and handle cyberbullying.',
+    seoDescription: 'Step-by-step guide for parents to help teens stay safe on TikTok and Instagram. Covers privacy settings, screen time, and cyberbullying.',
+    seoKeywords: ['tiktok safety parents', 'instagram privacy settings', 'teen social media safety', 'cyberbullying help'],
+    content: `
+## Helping Teens Navigate the Feed
+
+For teens, TikTok and Instagram aren't just apps; they are their social squares. Banning them often leads to secrecy. Instead, focus on "Privacy Hygiene"—setting up the account correctly so they can have fun without exposing themselves to the world.
+
+### The "Public by Default" Problem
+Most apps set new accounts to "Public" automatically. This means anyone—including strangers and predators—can see their videos and download them.
+
+### TikTok Safety Checklist
+Sit down with your teen and walk through these settings:
+1.  **Private Account**: Go to *Settings > Privacy* and toggle **Private Account** to ON. Now only approved friends can watch videos.
+2.  **Suggest Account to Others**: Turn this **OFF**. This stops the algorithm from recommending your teen's account to random contacts.
+3.  **Downloads**: Turn **OFF**. This prevents strangers from saving your teen's videos to their phones.
+4.  **Direct Messages**: Set to **"Friends"** or **"No One"**. Never leave it on "Everyone".
+
+### Instagram Safety Checklist
+1.  **Private Profile**: Go to *Settings > Account Privacy* and switch to **Private**.
+2.  **Hidden Words**: Go to *Privacy > Hidden Words*. Turn on "Hide Comments" to automatically filter out bullying or offensive language.
+3.  **Close Friends**: Encourage them to post personal stories only to their "Close Friends" list, not their entire following.
+
+### Screen Time & Mental Health
+The algorithms are designed to be addictive.
+*   **Set Limits**: Use the app's built-in "Daily Limit" tools.
+*   **Sleep Mode**: Configure "Quiet Mode" on Instagram to mute notifications at night.
+*   **Reality Check**: Remind teens that what they see is a highlight reel, not real life.
+
+### The Family Agreement
+Don't just dictate rules. Agree on them.
+*   "We don't share our address or school name."
+*   "We don't talk to people we haven't met in real life."
+*   "If something feels weird, we show Mom or Dad immediately, no punishment."
+
+### Recommended Next Reads
+*   **Keeping Kids Safe on Social Media** - General principles for younger children.
+*   **Cyberbullying: What Parents Need to Know** - How to spot the signs.
+    `,
+    contentBeginner: `
+## Keeping Teens Safe on Apps
+
+Teenagers love TikTok and Instagram. Here is how to make those apps safer.
+
+### Make it Private
+The most important button is **"Private Account"**.
+*   When an account is **Public**, anyone in the world can see the photos.
+*   When an account is **Private**, only friends can see them.
+Change this setting in the "Privacy" menu today!
+
+### Stop Strangers
+Make sure strangers cannot send messages.
+*   Go to settings and change "Messages" to **"Friends Only"**.
+
+### Take a Break
+These apps are hard to stop looking at. Set a timer on the phone so your teen gets sleep at night.
+    `,
+    contentAdvanced: `
+## Algorithmic Influence & Data Privacy
+
+Beyond basic privacy toggles, parents should understand the data harvesting and algorithmic nature of these platforms.
+
+### Data Minimization
+*   **Contacts Sync**: Disable "Sync Contacts". This prevents the platform from building a shadow graph of your teen's real-world network.
+*   **Location Services**: Revoke "Precise Location" permission at the OS level (iOS/Android).
+
+### Algorithmic Radicalization
+The "For You" page (FYP) optimizes for engagement (time spent). This can inadvertently spiral users into "rabbit holes" of harmful content (e.g., eating disorders, self-harm).
+*   **Restricted Mode**: Enable this in TikTok settings to filter out mature content.
+*   **Content Preferences**: Teach teens to "Long Press" on bad videos and select "Not Interested" to retrain the algorithm.
+
+### Sextortion Awareness
+Educate teens about "Sextortion"—where a scammer poses as a romantic interest, requests a compromising photo, and then blackmails the victim. The FBI reports a massive rise in these cases targeting teen boys.
     `
   }
 ];

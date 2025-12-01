@@ -1,10 +1,50 @@
-import { GoogleGenAI, Type } from "@google/genai";
+import { GoogleGenAI, Type, Chat } from "@google/genai";
 import { Article, QuizQuestion, SearchResult } from "../types";
+import { INITIAL_ARTICLES } from '../constants';
 
 // Initialize Gemini Client
 // Note: We use process.env.API_KEY as per guidelines.
 const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
 const modelName = 'gemini-2.5-flash';
+
+/**
+ * Creates a chat session with context-aware system instructions.
+ */
+export const createChatSession = (role: string, language: string): Chat => {
+  // Construct a lightweight knowledge base from the articles
+  const knowledgeBase = INITIAL_ARTICLES.map(a => 
+    `- Title: "${a.title}" (ID: ${a.id})\n  Summary: ${a.summary}\n  Audience: ${a.audience}`
+  ).join('\n\n');
+
+  const systemInstruction = `
+    You are the AI Support Assistant for Vidacyberinsights, a global cybersecurity awareness app.
+    
+    Current User Context:
+    - Role: ${role} (Adjust tone and complexity accordingly)
+    - Language Preference: ${language} (Reply in this language)
+    
+    Your Knowledge Base (Available Articles):
+    ${knowledgeBase}
+    
+    Guidelines:
+    1. Answer questions primarily using the provided Knowledge Base.
+    2. If a user asks about a topic covered in an article, provide a brief answer and explicitly recommend reading that article.
+    3. Be helpful, concise, and friendly.
+    4. Do not provide medical, legal, or financial advice.
+    5. If the answer is not in the knowledge base, provide general best-practice cybersecurity advice but mention it is general knowledge.
+    6. Format your responses with Markdown (bolding for key terms, bullet points for lists).
+    7. CRITICAL: If you recommend specific articles from the knowledge base, append their IDs at the VERY END of your response in this exact format:
+       RECOMMENDED: [id1, id2]
+       Do not include this tag if you are not recommending specific articles.
+  `;
+
+  return ai.chats.create({
+    model: 'gemini-3-pro-preview',
+    config: {
+      systemInstruction: systemInstruction,
+    }
+  });
+};
 
 /**
  * Generates a multiple-choice quiz based on the article content.

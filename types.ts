@@ -16,6 +16,7 @@ export interface Article {
   imageUrl: string;
   imagePrompt?: string; // The prompt used/intended for generating the image
   altText: string; // Accessibility description
+  imageCaption?: string; // Caption providing context for the image
   author: string;
   publishDate: string;
   seoDescription?: string;

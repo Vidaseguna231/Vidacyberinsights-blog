@@ -2,7 +2,8 @@
 import React, { useState, useEffect } from 'react';
 import { UserRole, Language } from '../types';
 import { LANGUAGES } from '../constants';
-import { ShieldCheck, Menu, X, Globe, Type, Eye } from 'lucide-react';
+import { ShieldCheck, Menu, X, Globe, Type, Eye, Map } from 'lucide-react';
+import ChatBot from './ChatBot';
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -12,10 +13,11 @@ interface LayoutProps {
   onLanguageChange: (lang: Language) => void;
   onNavigateHome: () => void;
   onNavigateArchive?: (date: string) => void;
+  onNavigateRoadmap?: () => void;
 }
 
 const Layout: React.FC<LayoutProps> = ({ 
-  children, userRole, onRoleChange, language, onLanguageChange, onNavigateHome, onNavigateArchive
+  children, userRole, onRoleChange, language, onLanguageChange, onNavigateHome, onNavigateArchive, onNavigateRoadmap
 }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [largeText, setLargeText] = useState(false);
@@ -45,10 +47,20 @@ const Layout: React.FC<LayoutProps> = ({
     <div className={`min-h-screen flex flex-col bg-slate-50 ${highContrast ? 'bg-white text-black' : ''}`}>
       <header className={`sticky top-0 z-50 shadow-lg ${highContrast ? 'bg-black text-white border-b-2 border-white' : 'bg-slate-900 text-white'}`}>
         <div className="container mx-auto px-4 h-16 flex items-center justify-between">
-          <button onClick={onNavigateHome} className="flex items-center gap-2 hover:text-cyan-400 transition-colors focus:outline-none focus:ring-2 focus:ring-cyan-400 rounded-lg p-1">
-            <ShieldCheck className={`h-8 w-8 ${highContrast ? 'text-yellow-400' : 'text-cyan-400'}`} />
-            <span className="font-bold text-xl tracking-tight">Vidacyberinsights</span>
-          </button>
+          <div className="flex items-center gap-6">
+              <button onClick={onNavigateHome} className="flex items-center gap-2 hover:text-cyan-400 transition-colors focus:outline-none focus:ring-2 focus:ring-cyan-400 rounded-lg p-1">
+                <ShieldCheck className={`h-8 w-8 ${highContrast ? 'text-yellow-400' : 'text-cyan-400'}`} />
+                <span className="font-bold text-xl tracking-tight">Vidacyberinsights</span>
+              </button>
+
+              {/* Desktop Roadmap Link */}
+              <button 
+                onClick={onNavigateRoadmap}
+                className="hidden xl:flex items-center gap-1 text-sm font-medium text-slate-300 hover:text-cyan-400 transition-colors"
+              >
+                  <Map className="w-4 h-4" /> Roadmap
+              </button>
+          </div>
 
           {/* Desktop Nav */}
           <nav className="hidden xl:flex items-center gap-4" aria-label="Main Navigation">
@@ -141,6 +153,13 @@ const Layout: React.FC<LayoutProps> = ({
                     <Eye className="w-4 h-4" /> Contrast
                  </button>
             </div>
+            
+            <button 
+                onClick={() => { onNavigateRoadmap && onNavigateRoadmap(); setIsMenuOpen(false); }}
+                className="flex items-center gap-2 w-full text-left px-3 py-2 rounded-md text-slate-300 hover:bg-slate-700 mb-2"
+            >
+                <Map className="w-4 h-4" /> Roadmap
+            </button>
 
             <div className="flex flex-col gap-2">
                <span className="text-xs font-semibold text-slate-500 uppercase tracking-wider">Role</span>
@@ -182,6 +201,8 @@ const Layout: React.FC<LayoutProps> = ({
         {children}
       </main>
 
+      <ChatBot userRole={userRole} language={language} />
+
       <footer className={`py-12 mt-12 border-t ${highContrast ? 'bg-black text-white border-white' : 'bg-slate-900 text-slate-400 border-slate-800'}`}>
         <div className="container mx-auto px-4 grid md:grid-cols-4 gap-8 mb-8">
             <div className="md:col-span-1">
@@ -206,6 +227,7 @@ const Layout: React.FC<LayoutProps> = ({
             <div>
                  <h3 className="font-bold text-white mb-4 uppercase text-xs tracking-wider">Explore</h3>
                 <ul className="text-sm space-y-2 opacity-80">
+                    <li><button onClick={() => onNavigateRoadmap && onNavigateRoadmap()} className="hover:text-cyan-400 transition-colors">Learning Roadmap</button></li>
                     <li><button onClick={() => onNavigateArchive && onNavigateArchive('2024')} className="hover:text-cyan-400 transition-colors">2024 Archives</button></li>
                     <li><button onClick={() => onNavigateArchive && onNavigateArchive('2023')} className="hover:text-cyan-400 transition-colors">2023 Archives</button></li>
                     <li><button className="hover:text-cyan-400 transition-colors">Glossary</button></li>
